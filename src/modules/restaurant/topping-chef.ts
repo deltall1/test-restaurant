@@ -1,12 +1,11 @@
-import { OrderStatus, QUEUE_NAME, SECOND } from '../../constants';
 import { Injectable, Logger } from '@nestjs/common';
-import { Job } from 'bull';
 import { Process, Processor } from '@nestjs/bull';
+import { Job } from 'bull';
 import * as humanizeDuration from 'humanize-duration';
-import { restaurantConfig } from '../../configs/restaurant.config';
+
 import { Order } from '../entities/order.entity';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { OrderStatus, QUEUE_NAME, SECOND } from '../../constants';
+import { restaurantConfig } from '../../configs/restaurant.config';
 import { RestaurantQueue } from './restaurant.queue';
 import { RepositoryService } from '../repository/repository.service';
 
@@ -15,7 +14,7 @@ import { RepositoryService } from '../repository/repository.service';
 export class ToppingChef {
   private readonly _logger = new Logger(ToppingChef.name);
   private readonly _toppingPerTime = 2;
-  private readonly _processingTime = 1 * SECOND;
+  private readonly _processingTime = 4 * SECOND;
 
   constructor(
     private readonly restaurantQueueService: RestaurantQueue,

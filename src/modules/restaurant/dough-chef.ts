@@ -13,7 +13,7 @@ import { RepositoryService } from '../repository/repository.service';
 @Processor(QUEUE_NAME.DOUGH_CHEFS)
 export class DoughChef {
   private readonly _logger = new Logger(DoughChef.name);
-  private readonly _processingTime = 1 * SECOND;
+  private readonly _processingTime = 7 * SECOND;
 
   constructor(
     private readonly restaurantQueueService: RestaurantQueue,
@@ -26,6 +26,7 @@ export class DoughChef {
     const order = await this.repositoryService.findOrder({
       where: { id: job.data.id },
     });
+    order.cookingStartedAt = new Date();
 
     await new Promise((resolve) => setTimeout(resolve, this._processingTime));
 

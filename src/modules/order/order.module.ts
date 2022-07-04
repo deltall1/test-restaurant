@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
+import { BullModule } from '@nestjs/bull';
+
 import { OrderController } from './order.controller';
 import { OrderService } from './order.service';
-import { BullModule } from '@nestjs/bull';
 import { OrderListener } from './order.listener';
 import { QUEUE_NAME } from '../../constants';
 import { RepositoryModule } from '../repository/repository.module';

@@ -1,10 +1,11 @@
-import { OrderStatus, QUEUE_NAME, SECOND } from '../../constants';
 import { Injectable, Logger } from '@nestjs/common';
 import { Process, Processor } from '@nestjs/bull';
 import { Job } from 'bull';
 import * as humanizeDuration from 'humanize-duration';
-import { restaurantConfig } from '../../configs/restaurant.config';
+
 import { Order } from '../entities/order.entity';
+import { OrderStatus, QUEUE_NAME, SECOND } from '../../constants';
+import { restaurantConfig } from '../../configs/restaurant.config';
 import { RestaurantQueue } from './restaurant.queue';
 import { RepositoryService } from '../repository/repository.service';
 
@@ -12,7 +13,7 @@ import { RepositoryService } from '../repository/repository.service';
 @Processor(QUEUE_NAME.OVENS)
 export class Oven {
   private readonly _logger = new Logger(Oven.name);
-  private readonly _processingTime = 1 * SECOND;
+  private readonly _processingTime = 10 * SECOND;
 
   constructor(
     private readonly restaurantQueueService: RestaurantQueue,

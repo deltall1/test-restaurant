@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectQueue, Process, Processor } from '@nestjs/bull';
-import { QUEUE_NAME } from '../../constants';
 import { Job, Queue } from 'bull';
+
+import { QUEUE_NAME } from '../../constants';
 import { Order } from '../entities/order.entity';
 
 @Injectable()

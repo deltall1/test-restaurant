@@ -1,5 +1,3 @@
-import { Order } from './modules/entities/order.entity';
-
 export const SECOND = 1000;
 
 export const QUEUE_NAME = {
@@ -10,10 +8,21 @@ export const QUEUE_NAME = {
   WAITERS: 'waiters',
 };
 
-export const enum OrderStatus {
+export enum OrderStatus {
   PENDING = 'PENDING',
   COOKING = 'COOKING',
   SERVED = 'SERVED',
 }
 
-
+export enum PizzaToppings {
+  Pepperoni = 'Pepperoni',
+  ExtraCheese = 'Extra Cheese',
+  Mushrooms = 'Mushrooms',
+  Onions = 'Onions',
+  Sausage = 'Sausage',
+  BlackOlives = 'Black Olives',
+  GreenPeppers = 'Green Peppers',
+  Pineapple = 'Pineapple',
+  Spinach = 'Spinach',
+  Mozzarella = 'Mozzarella',
+}

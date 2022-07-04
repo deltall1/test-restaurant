@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
-import { RepositoryService } from './repository.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
+
+import { RepositoryService } from './repository.service';
 import { Order } from '../entities/order.entity';
 import { OrderReport } from '../entities/order-report.entity';
 

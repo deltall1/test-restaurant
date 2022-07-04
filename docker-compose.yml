@@ -6,12 +6,12 @@ networks:
 services:
   postgres:
     container_name: restaurant-db
-    image: postgres:13.3-alpine
+    image: postgres:latest
     restart: always
     environment:
-      - POSTGRES_USER:developer
-      - POSTGRES_PASSWORD:password
-      - POSTGRES_DB:restaurant
+      POSTGRES_USER: developer
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: restaurant
     ports:
       - '5432:5432'
     volumes:

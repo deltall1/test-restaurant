@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { BullModule } from '@nestjs/bull';
+
 import { QUEUE_NAME } from '../../constants';
 import { DoughChef } from './dough-chef';
 import { ToppingChef } from './topping-chef';

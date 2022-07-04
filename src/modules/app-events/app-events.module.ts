@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+
 import { AppEventsEmitter } from './app-events.emitter';
 
 @Module({

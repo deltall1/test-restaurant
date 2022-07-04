@@ -1,10 +1,11 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { OrderStatus, QUEUE_NAME, SECOND } from '../../constants';
 import { Process, Processor } from '@nestjs/bull';
 import { Job } from 'bull';
 import * as humanizeDuration from 'humanize-duration';
-import { restaurantConfig } from '../../configs/restaurant.config';
+
 import { Order } from '../entities/order.entity';
+import { OrderStatus, QUEUE_NAME, SECOND } from '../../constants';
+import { restaurantConfig } from '../../configs/restaurant.config';
 import { RepositoryService } from '../repository/repository.service';
 import { EventName } from '../app-events/app-events.types';
 import { AppEventsEmitter } from '../app-events/app-events.emitter';
@@ -13,7 +14,7 @@ import { AppEventsEmitter } from '../app-events/app-events.emitter';
 @Processor(QUEUE_NAME.WAITERS)
 export class Waiter {
   private readonly _logger = new Logger(Waiter.name);
-  private readonly _processingTime = 1 * SECOND;
+  private readonly _processingTime = 5 * SECOND;
 
   constructor(
     private readonly repositoryService: RepositoryService,

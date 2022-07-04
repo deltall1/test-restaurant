@@ -1,13 +1,15 @@
 import { Injectable } from '@nestjs/common';
-import { Order } from '../entities/order.entity';
-import { OrderDto } from './orderDto';
 import { InjectQueue } from '@nestjs/bull';
-import { EventName } from '../app-events/app-events.types';
 import { Queue } from 'bull';
 import { v4 } from 'uuid';
+
+import { Order } from '../entities/order.entity';
+import { OrdersDto } from './orders.dto';
+import { EventName } from '../app-events/app-events.types';
 import { RepositoryService } from '../repository/repository.service';
 import { AppEventsEmitter } from '../app-events/app-events.emitter';
 import { OrderStatus, QUEUE_NAME } from '../../constants';
+import { OrderReport } from '../entities/order-report.entity';
 
 @Injectable()
 export class OrderService {
@@ -17,10 +19,10 @@ export class OrderService {
     private readonly appEventsEmitter: AppEventsEmitter,
   ) {}
 
-  async createOrder(orders: OrderDto[]): Promise<Order[]> {
+  async createOrder(orders: OrdersDto): Promise<Order[]> {
     const orderId = v4();
 
-    const dbOrders = orders.map((el) =>
+    const dbOrders = orders.orders.map((el) =>
       this.repositoryService.createOrder({
         orderId,
         toppings: el.toppings,
@@ -34,5 +36,13 @@ export class OrderService {
     });
 
     return dbOrders;
+  }
+
+  async getOrder(orderId: string): Promise<Order[]> {
+    return this.repositoryService.findOrders({ where: { orderId } });
+  }
+
+  getOrderReport(orderId: string): Promise<OrderReport> {
+    return this.repositoryService.findOrderReport({ where: { orderId } });
   }
 }

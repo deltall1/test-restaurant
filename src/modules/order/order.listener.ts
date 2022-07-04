@@ -1,9 +1,10 @@
 import { InjectQueue } from '@nestjs/bull';
-import { Queue } from 'bull';
-import { QUEUE_NAME } from '../../constants';
 import { Injectable, Logger } from '@nestjs/common';
-import * as humanizeDuration from 'humanize-duration';
 import { OnEvent } from '@nestjs/event-emitter';
+import { Queue } from 'bull';
+
+import { QUEUE_NAME } from '../../constants';
+import * as humanizeDuration from 'humanize-duration';
 import { EventName, EventPayload } from '../app-events/app-events.types';
 import { RepositoryService } from '../repository/repository.service';
 
@@ -41,9 +42,8 @@ export class OrderListener {
       totalTime,
     });
 
-    console.log(orderReport.data);
     orders.forEach((el) => {
-      const orderTime = el.servedAt.getTime() - el.createdAt.getTime();
+      const orderTime = el.servedAt.getTime() - el.cookingStartedAt.getTime();
       this._logger.log(`Order ${el.id} preparation time: ${humanizeDuration(orderTime)}`);
       orderReport.data.push({
         id: el.id,
