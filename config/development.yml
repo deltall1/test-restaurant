@@ -1,0 +1,13 @@
+server:
+  port: 3000
+  stage: 'development'
+
+redis:
+  host: 'localhost'
+  port: 5003
+
+restaurant:
+  doughChefs: 2
+  toppingChefs: 3
+  oven: 1
+  waiters: 2
